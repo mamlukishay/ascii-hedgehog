@@ -1,4 +1,4 @@
-class DigitFactory
+class CharacterFactory
 	BINARY_NUM_TO_DECIMAL = {
 			"1101111" => "0",
 			"0001001" => "1",
@@ -11,10 +11,10 @@ class DigitFactory
 			"1111111" => "8",
 			"1111011" => "9"
 		}
-	ILEGAL_BINARY_NUM = "?"
-	def self.digit_from_binary(binary_str)
+
+	def self.character_from_binary(binary_str)
 		num = BINARY_NUM_TO_DECIMAL[binary_str]
-		num ? Digit.new(num, true) : Digit.new(ILEGAL_BINARY_NUM, false)
+		num ? Digit.new(num) : IllegalCharacter.new
 	end
 
 end
