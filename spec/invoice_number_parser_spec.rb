@@ -32,3 +32,8 @@ describe InvoiceNumberParser do
 		end
 	end
 end
+
+# Ishay
+# I would consider using Tempfile instead of File - Google it
+# Then, on before each, you can do something line: allow File.to receive(:open).and return { Tempfile.new }
+# Same structure changes in character_factory_spec wuolb be good here too

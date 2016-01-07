@@ -8,3 +8,7 @@ describe Digit do
 		end
 	end
 end
+
+# What's this test for??
+# You didn't implement to_s on Digit, so what are you trying to test here?
+# Anyhow, I guess the '?' is a bad copy/paste from IllegalCharacter

@@ -58,3 +58,56 @@ describe Line do
 		end
 	end
 end
+
+# Ishay
+# 1. 	Instance variables in tests are bad! They make ou maintain them because they are shared between tests. 
+# 	 	You should try to keep each test totally independent from the others.
+# 2. 	(related to 1) Ususally you don't need a before clause (It's an old-school approach which makes you use intance vars). Instead use let.
+# 3. 	I don't know if testing an instance variable of an object is a good pratice - There're opinions about it, but generally
+# 		if you make a go design, your tests should only check public methods of your object.
+# 4.	I would consider renaming 'add_input_line' to 'add_input_line!' because it changes the instance itself (like gsub and gsub!).
+
+describe Line do
+
+	let(:line) { Line.new }
+	
+	describe 'conversion of input lines to output' do
+		context 'when only valid digits are given' do
+			let(:input_lines) {[
+				" _     _  _  _  _  _     _ \n",
+				"|_|  ||_| _||_ |_  _||_||_|\n",
+				"|_|  | _||_ |_||_||_   ||_|\n"
+				
+			]}
+
+			it "should convert the input lines to a valid number" do
+				add_input_lines_and_convert_to_output
+				expect(line.to_s) to eq "819266248"
+			end
+		end		
+
+		context 'when the input contains invalid digits' do
+			let(:input_lines) {[
+				" _     _  _  _  _  _     _ \n",
+				"|_|  ||_| _||_ |_  _||_||_|\n",
+				"|_|  | _||_ |_||_||_    |_|\n"
+				
+			]}
+
+			it "should put a '?' char for every invalid chracter" do
+				add_input_lines_and_convert_to_output
+				expect(line.to_s.slice(0,9)) to eq "8192662?8"
+			end
+
+			it "should write 'ILLEGAL' at the end of the output" do
+				add_input_lines_and_convert_to_output
+				expect(line.to_s.slice(8)) to eq " ILLEGAL"
+			end
+		end
+
+		def add_input_lines_and_convert_to_output
+			input_lines.each { |in_line| line.add_input_line(in_line) }
+			line.convert_input_lines_to_output
+		end
+	end	
+end
