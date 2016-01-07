@@ -2,7 +2,6 @@ class Line
 
 	def initialize 
 		@input_lines = []
-		@legal = true
 		@character_arr = []
 	end
 
@@ -16,7 +15,7 @@ class Line
 
 	def to_s
 		str = @character_arr.join()
-		str += " ILLEGAL" unless @legal
+		str += " ILLEGAL" if is_illegal?
 		str
 	end
 
@@ -44,8 +43,10 @@ class Line
 		end
 
 		def new_character(binary_str)
-			character = CharacterFactory.character_from_binary(binary_str)
-			@legal = false if character.is_a?(IllegalCharacter)
-			@character_arr << character
+			@character_arr << CharacterFactory.character_from_binary(binary_str)
+		end
+
+		def is_illegal?
+			@character_arr.any? {|c| c.is_a?(IllegalCharacter)}
 		end
 end
