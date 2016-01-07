@@ -9,7 +9,7 @@ class Line
 		@input_lines << input_line
 	end
 
-	def input_lines_to_output
+	def convert_input_lines_to_output
 		input_lines_to_characters
 	end
 
